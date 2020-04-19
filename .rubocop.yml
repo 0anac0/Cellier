@@ -1,0 +1,138 @@
+
+AllCops:
+  TargetRubyVersion: "2.3.4"
+  Exclude:
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'bin/**/*'
+    - 'app/models/ability.rb'
+  DefaultFormatter: progress
+  DisplayCopNames: true
+
+# Exclude Rails ERB files from incompatible cops
+Layout/BlockAlignment:
+  Exclude:
+    - 'app/views/**/*.erb'
+
+Style/For:
+  Exclude:
+    - 'app/views/**/*.erb'
+
+Style/OneLineConditional:
+  Exclude:
+    - 'app/views/**/*.erb'
+
+Layout/SpaceInsideParens:
+  Exclude:
+    - 'app/views/**/*.erb'
+
+Style/StringLiterals:
+  Exclude:
+    - 'app/views/**/*.erb'
+
+
+Layout/TrailingWhitespace:
+  Exclude:
+    - 'app/views/**/*.erb'
+
+Style/SymbolArray:
+  Enabled: false
+
+Style/WordArray:
+  Enabled: false
+
+# Commonly used screens these days easily fit more than 80 characters.
+Layout/LineLength:
+  Max: 110
+
+# Too short methods lead to extraction of single-use methods, which can make
+# the code easier to read (by naming things), but can also clutter the class.
+Metrics/MethodLength:
+  Max: 20
+
+Metrics/BlockLength:
+  Enabled: true
+  Exclude: 
+    - 'app/ui/**/*'
+
+Metrics/AbcSize:
+  Enabled: false
+
+# Most readable form.
+#Style/AlignHash:
+#  EnforcedHashRocketStyle: table
+#  EnforcedColonStyle: table
+
+# Related to 'Prefer Date or Time over DateTime' warning.
+Style/DateTime:
+  Enabled: false
+
+Style/CollectionMethods:
+  Enabled: true
+
+# Mixing the styles looks just silly.
+Style/HashSyntax:
+  EnforcedStyle: ruby19_no_mixed_keys
+
+# String#% is by far the least verbose and only object oriented variant.
+Style/FormatString:
+  EnforcedStyle: percent
+
+Style/Lambda:
+  EnforcedStyle: literal
+
+# Either allow this style or don't. Marking it as safe with parenthesis
+# is silly. Let's try to live without them for now.
+Style/ParenthesesAroundCondition:
+  AllowSafeAssignment: false
+Lint/AssignmentInCondition:
+  AllowSafeAssignment: false
+
+# A specialized exception class will take one or more arguments and
+# construct the message from it. So both variants make sense.
+Style/RaiseArgs:
+  Enabled: false
+
+# Indenting the chained dots beneath each other is not supported by this cop,
+# see https://github.com/bbatsov/rubocop/issues/1633
+Layout/MultilineOperationIndentation:
+  Enabled: false
+
+# Fail is an alias of raise. Avoid aliases, it's more cognitive load for no
+# gain. The argument that fail should be used to abort the program is wrong
+# too, there's Kernel#abort for that.
+Style/SignalException:
+  EnforcedStyle: only_raise
+
+# Suppressing exceptions can be perfectly fine, and be it to avoid to
+# explicitly type nil into the rescue since that's what you want to return,
+# or suppressing LoadError for optional dependencies
+Lint/SuppressedException:
+  Enabled: false
+
+# No trailing space differentiates better from the block:
+# foo} means hash, foo } means block.
+Layout/SpaceInsideHashLiteralBraces:
+  EnforcedStyle: no_space
+
+# do / end blocks should be used for side effects,
+# methods that run a block for side effects and have
+# a useful return value are rare, assign the return
+# value to a local variable for those cases.
+Style/MethodCalledOnDoEndBlock:
+  Enabled: true
+
+# Enforcing the names of variables? To single letter ones? Just no.
+Style/SingleLineBlockParams:
+  Enabled: false
+
+# Check with yard instead.
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/SymbolProc:
+  Enabled: false
+
